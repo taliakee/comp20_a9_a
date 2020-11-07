@@ -1,0 +1,71 @@
+{
+    "setlist" : {
+
+        "songs" : [
+            {
+                "artist" : "Taylor Swift",
+                "title"  : "Lover",
+                "genres" : ["Pop"],
+                "year"   : "2019"
+
+            },
+            {
+                "artist" : "James Arthur",
+                "title"  : "Falling Like The Stars",
+                "genres" : ["Pop"],
+                "year"   : "2019"
+
+            },
+            {
+                "artist" : "Lewis Capaldi",
+                "title"  : "Before You Go",
+                "genres" : ["Alternative", "Indie"],
+                "year"   : "2019"
+            },
+            {
+                "artist" : "Queen",
+                "title"  : "Love Of My Life",
+                "genres" : ["Rock"],
+                "year"   : "1975"
+            },
+            {
+                "artist" : "Tracy Chapman",
+                "title"  : "Fast Car",
+                "genres" : ["Folk"],
+                "year"   : "1988"
+            },
+            {
+                "artist" : "The Beatles",
+                "title"  : "Hey Jude",
+                "genres" : ["Pop", "Rock"],
+                "year"   : "1968"
+            },
+            {
+                "artist" : "Dan + Shay",
+                "title"  : "Speechless",
+                "genres" : ["Country", "Pop"],
+                "year"   : "2018"
+            },
+            {
+                "artist" : "Lauv",
+                "title"  : "Tattoos Together",
+                "genres" : ["Pop"],
+                "year"   : "2020"
+            },
+            {
+                "artist" : "Lady Gaga",
+                "title"  : "Always Remember Us This Way",
+                "genres" : ["Country"],
+                "year"   : "2018"
+            },
+            {
+                "artist" : "Bridget Mendler",
+                "title"  : "Hurricane",
+                "genres" : ["Pop"],
+                "year"   : "2013"
+            }
+        ]
+    }
+
+
+}
