@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Json Assignment</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+            // Returns inner HTML for a single song's info
+            function getChunk(jBlock){
+                var artist = jBlock['artist']
+                var title = jBlock['title']
+                var genres = jBlock['genres']
+                var year = jBlock['year']
+                genreLength = genres.length
+                var gString = "Genres: "
+                for (var i = 0; i < genreLength; i++){
+                    if (i != genreLength - 1){
+                        gString += (genres[i] + ", ")
+                    }
+                    else {
+                        gString += genres[i]
+                    }
+                }
+                
+
+                var text = "<h4 style = 'font-size: 20px;'> " + title + "<p style = 'font-size: 15px; font-weight: 200; margin-top: 0em'> Artist: " + artist + "<br/>" + gString +
+                            "<br/> Released: " + year + "</p> </h4>"
+                return text 
+            }
+            // Displays the Entire SetList info 
+            function showData(data, id){
+                var totalhtml = ""
+                for (var i = 0; i < 10; i++){
+                    totalhtml += getChunk(data[i])
+                }
+
+                document.getElementById(id).innerHTML = totalhtml
+            }
+        </script>
+        <script>
+            // Filters songs based on selected genre and only displays
+            // songs with specified genre
+            function filterSongs(songlist){
+                var numSongs = songlist.length
+                var genre = document.getElementById("genre").value
+                var bigText = ""
+                for (var i = 0; i < numSongs; i++){
+                    if ((songlist[i]['genres'].indexOf(genre)) > -1){
+                        bigText += getChunk(songlist[i])
+                    }
+                }
+                document.getElementById("fSongs").innerHTML = bigText
+                document.getElementById("fSongs").style.display = "block"
+                document.getElementById("setInfo").style.display = "none"
+            }
+        </script>
+   
+        <h2>
+            Raw string: <br/>
+            <p style = "font-size: 15px; font-weight: 200;" id = "rawstring"></p>
+        </h2>
+        <h2>
+            Setlist Info <br/>
+            <div id = "setInfo"></div>
+        </h2>
+        <div id = "fSongs" style="display: none;">
+
+        </div>
+        <form id = "form">
+            <label for="genre">Choose a genre:</label><br>
+            <select id="genre" name="genre">
+                <option value="Alternative">Alternative</option>
+                <option value="Country">Country</option>
+                <option value="Folk">Folk</option>
+                <option value="Indie">Indie</option>
+                <option value="Pop">Pop</option>
+                <option value="Rock">Rock</option>
+              </select>
+            <br/>
+            <input type="button" value="Filter">
+        </form >
+        <script>
+            var ajaxRequest = new XMLHttpRequest()
+            ajaxRequest.onreadystatechange = function () {
+                if (ajaxRequest.readyState == 4) {
+                    if (ajaxRequest.status == 200) {
+                        var jsonObj = JSON.parse(ajaxRequest.responseText)
+                        
+                        // Display raw json string
+                        document.getElementById("rawstring").innerHTML = JSON.stringify(jsonObj)
+
+                        // Display Entire Set List
+                        var sList = jsonObj['setlist']['songs']
+                        showData(sList, "setInfo")
+
+                        // Add filter event handler
+                        document.getElementById("form").addEventListener('click', function (){
+                            filterSongs(sList)
+                        })
+                    }
+                    else {
+                        console.log("Status error: " + ajaxRequest.status)
+                    }
+                }
+                else {
+                    console.log("Ignored readyState " + ajaxRequest.readyState)
+                }
+            }
+            ajaxRequest.open('GET', 'https://raw.githubusercontent.com/taliakee/comp20_a9_a/main/setlist.json')
+            ajaxRequest.send()
+        </script>
+    </body>
+</html>
